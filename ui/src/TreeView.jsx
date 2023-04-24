@@ -3,7 +3,7 @@ import axios from 'axios';
 import { MdFolder, MdFolderOpen, MdInsertDriveFile } from 'react-icons/md';
 import './TreeView.css';
 
-function TreeView() {
+function TreeView({ setSelectedNode }) {
     const [treeData, setTreeData] = useState([]);
 
     useEffect(() => {
@@ -17,6 +17,7 @@ function TreeView() {
         }
         const fetchData = async () => {
             const result = await axios('http://localhost:3000/api/tree');
+            console.log(result.data);
             addToggledProperty(result.data);
             setTreeData([result.data]);
         };
@@ -33,7 +34,13 @@ function TreeView() {
                 <div className="node-content" style={{ marginLeft }}>
                     {arrowIcon && <div className="node-arrow" onClick={() => isDirectory && toggleNode(node)}>{arrowIcon}</div>}
                     {fileIcon && <div className="node-file">{fileIcon}</div>}
-                    <span className="node-name" onClick={() => isDirectory && toggleNode(node)}>
+                    <span className="node-name"
+                        onClick={
+                            () => {
+                                isDirectory && toggleNode(node);
+                                !isDirectory && setSelectedNode(node);
+                            }
+                        }>
                         {node.name}
                     </span>
                 </div>
