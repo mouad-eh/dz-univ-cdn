@@ -1,0 +1,31 @@
+.tree-view {
+    font-size: 16px;
+}
+
+.tree-node {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 6px;
+}
+
+.node-content {
+    display: flex;
+    align-items: center;
+}
+
+.node-arrow,
+.node-file {
+    display: flex;
+    align-items: center;
+    margin-right: 6px;
+    font-size: 20px;
+}
+
+.node-name {
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.node-children {
+    margin-left: 20px;
+}
