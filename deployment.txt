@@ -1,0 +1,13 @@
+- change content file (add files suitable for demo)
+
+-add port as env variable in the node code
+-add the the desired port as env variable in node service configuration in docker compose
+
+*this part is a little bit complicated
+-modify frontend code to have domain-name as an env variable
+-specifying the domain name env variable in the nginx configuration
+
+
+-user will see .mp4 file but the requested file is the hls file
+-so we need to run the command for every video
+-make changes to nginx configuration

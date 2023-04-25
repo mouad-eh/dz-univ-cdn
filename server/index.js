@@ -7,10 +7,6 @@ const app = express();
 
 app.use(cors())
 
-app.get('/hello', (req, res) => {
-    res.send('Hello, world!');
-});
-
 app.get('/api/tree', (req, res) => {
     const rootDir = path.resolve(__dirname, '../')
     const dirPath = path.join(rootDir, 'content');
@@ -18,10 +14,18 @@ app.get('/api/tree', (req, res) => {
     res.json(tree);
 });
 
-app.get('/*', async (req, res) => {
+app.get('/api/*', async (req, res) => {
     const relativePath = req.params[0]
     const rootDir = path.resolve(__dirname, '../')
     const absolutePath = path.join(rootDir, relativePath)
+    res.sendFile(absolutePath)
+    return;
+})
+
+app.get('/api/stream/*', async (req, res) => {
+    const fileName = req.params[0]
+    const streamDir = path.resolve(__dirname, '../stream')
+    const absolutePath = path.join(streamDir, fileName)
     res.sendFile(absolutePath)
     return;
 })

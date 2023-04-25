@@ -1,0 +1,3 @@
+ffmpeg -i test.mp4 -codec: copy -start_number 0 -hls_time 10 -hls_list_size 0 -f hls test.m3u8
+ffmpeg -i ../content/url_in_browser.mp4 -codec: copy -start_number 0 -hls_time 10 -hls_list_size 0 -f hls url_in_browser.m3u8
+ffmpeg -i ../content/dns_course.mp4 -codec: copy -start_number 0 -hls_time 10 -hls_list_size 0 -f hls dns_course.m3u8

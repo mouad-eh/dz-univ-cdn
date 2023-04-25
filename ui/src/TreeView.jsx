@@ -16,7 +16,7 @@ function TreeView({ setSelectedNode }) {
             }
         }
         const fetchData = async () => {
-            const result = await axios('http://localhost:3000/api/tree');
+            const result = await axios('http://localhost/api/tree');
             console.log(result.data);
             addToggledProperty(result.data);
             setTreeData([result.data]);
