@@ -1,36 +1,28 @@
 version: '3'
 
 services:
-  varnish:
-    image: varnish:latest
+  nginx:
+    image: nginx:latest
     ports:
       - "80:80"
     volumes:
-      - ./default.vcl:/etc/varnish/default.vcl
-    depends_on:
-      - nginx
-  
-  nginx:
-    image: nginx:latest
-    volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
-      # - ./stream:/usr/share/nginx/stream
+      - ./stream:/usr/share/nginx/stream
+      - ./content:/usr/share/nginx/content
       - ./ui/dist:/var/www/html
     depends_on:
       - node
   node:
     image: node:latest 
-    user: "node"
+    user: "root"
     working_dir: /home/node/app
     environment:
       - NODE_ENV=production
     volumes:
       - ./server:/home/node/app
       - ./content:/home/node/content
-    # add stream folder to node container
-      - ./stream:/home/node/stream
     expose:
       - "3000"
-    command: "node index.js"
+    command: sh -c "npm install && node index.js"
 
 
