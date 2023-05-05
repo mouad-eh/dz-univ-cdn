@@ -25,11 +25,11 @@ function getEndPointFromPath(filePath) {
     if (startIndex === -1) {
         return '';
     }
-    return 'http://localhost/api' + replaceBackslashes(filePath.slice(startIndex));
+    return 'http://localhost/' + replaceBackslashes(filePath.slice(startIndex));
 }
 
 function getEndPointForVideo(filename) {
-    return 'http://localhost/api/stream/' + getFileName(filename) + '.m3u8';
+    return 'http://localhost/stream/' + getFileName(filename) + '.m3u8';
 }
 
 export default function MainPage() {
