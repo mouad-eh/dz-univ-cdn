@@ -25,7 +25,7 @@ function getEndPointFromPath(filePath) {
     if (startIndex === -1) {
         return '';
     }
-    return 'http://localhost/' + replaceBackslashes(filePath.slice(startIndex));
+    return 'http://localhost' + replaceBackslashes(filePath.slice(startIndex));
 }
 
 function getEndPointForVideo(filename) {
@@ -56,9 +56,10 @@ export default function MainPage() {
                             ></ReactHlsPlayer>
                             :
                             <FileViewer
+                                key={selectedNode.name}
                                 fileType={getFileExt(selectedNode.name)}
                                 filePath={getEndPointFromPath(selectedNode.path)}
-                                errorComponent={<div>there is an error</div>}
+                                errorComponent={<div>there is an error loading {selectedNode.name}</div>}
                                 onError={(e) => console.log(e)}
                             />)
                     }
