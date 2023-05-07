@@ -7,22 +7,29 @@ services:
       - "80:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./stream:/usr/share/nginx/stream
       - ./content:/usr/share/nginx/content
-      - ./ui/dist:/var/www/html
     depends_on:
-      - node
-  node:
-    image: node:latest 
-    user: "root"
-    working_dir: /home/node/app
-    environment:
-      - NODE_ENV=production
+      - new_ui
+  
+  new_ui:
+    build: new_ui
     volumes:
-      - ./server:/home/node/app
-      - ./content:/home/node/content
-    expose:
-      - "3000"
-    command: sh -c "npm install && node index.js"
+      - ./content:/content
+    ports:
+      - '5000:5000'
+
+
+  # node:
+  #   image: node:latest 
+  #   user: "root"
+  #   working_dir: /home/node/app
+  #   environment:
+  #     - NODE_ENV=production
+  #   volumes:
+  #     - ./server:/home/node/app
+  #     - ./content:/home/node/content
+  #   expose:
+  #     - "3000"
+  #   command: sh -c "npm install && node index.js"
 
 
